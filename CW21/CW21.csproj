@@ -17,10 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Doctor\Controllers\" />
-    <Folder Include="Areas\Doctor\Data\" />
-    <Folder Include="Areas\Doctor\Models\" />
-    <Folder Include="Areas\Doctor\Views\" />
+    <Folder Include="Areas\DoctorArea\Data\" />
+    <Folder Include="Areas\DoctorArea\Models\" />
   </ItemGroup>
 
 </Project>

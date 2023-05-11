@@ -1,33 +1,31 @@
-﻿using CW21.DAL.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using CW21.DAL.Entities;
 using CW21.Models.ViewModels;
 using CW21.Repositories;
-using Microsoft.AspNetCore.Mvc;
+using CW21.Repositories.Doctors;
 
-namespace CW21.Controllers
+namespace CW21.Areas.DoctorArea.Controllers
 {
+    [Area("DoctorArea")]
     public class AccountController : Controller
     {
-        private readonly IPatientRepository _patientRepository;
+        private readonly IDoctorRepository _doctorRepository;
 
-        public AccountController(IPatientRepository patientRepository)
+        public AccountController(IDoctorRepository doctorRepository)
         {
-            _patientRepository = patientRepository;
+            _doctorRepository = doctorRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult RegisterDoctor()
         {
+
             return View();
         }
 
-        public IActionResult RegisterPatient()
-        {
-            return View();
-        }
         [HttpPost]
-        public IActionResult RegisterPatient(Patient patient)
+        public IActionResult RegisterDoctor(Doctor doctor)
         {
-
-            int result = _patientRepository.RegisterPatient(patient);
+            int result = _doctorRepository.RegisterDoctor(doctor);
             if (result == 0)
             {
                 ViewBag.message = "این کاربر موجود است";
@@ -38,19 +36,17 @@ namespace CW21.Controllers
                 ViewBag.message = "کاربر ثبت شد";
                 return View();
             }
-
         }
 
-
-        public IActionResult LoginPatient()
+        public IActionResult LoginDoctor()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult LoginPatient(LoginViewModel model)
+        public IActionResult LoginDoctor(LoginViewModel model)
         {
-            var result = _patientRepository.LoginPatient(model);
+            var result = _doctorRepository.LoginDoctor(model);
             if (result)
             {
                 return RedirectToAction("Index");
@@ -61,6 +57,5 @@ namespace CW21.Controllers
                 return View();
             }
         }
-
     }
 }

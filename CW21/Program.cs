@@ -1,4 +1,6 @@
 using CW21.DAL.Context;
+using CW21.Repositories;
+using CW21.Repositories.Doctors;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(option =>
-option.UseSqlServer("Data Source=.;Initial Catalog=db_Maktab_CW21;User Id=sa;Password=09389059421;TrustServerCertificate=True"));
+option.UseSqlServer("Data Source=.;Initial Catalog=db_Maktab_CW21;User Id=sa;Password=6925;TrustServerCertificate=True"));
+
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+
 
 var app = builder.Build();
 
@@ -27,15 +33,16 @@ app.UseRouting();
 app.UseAuthorization();
 
 
-
-app.MapControllerRoute(
-  name: "areas",
-  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-
-
 app.MapControllerRoute(
 name: "default",
 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapAreaControllerRoute(
+  areaName: "DoctorArea",
+  name: "areas",
+  pattern: "{area:exists}/{controller=Account}/{action=LoginDoctor}/{id?}");
+
+
+
 
 app.Run();
