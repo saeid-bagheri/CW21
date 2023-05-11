@@ -18,7 +18,6 @@ namespace CW21.Areas.DoctorArea.Controllers
 
         public IActionResult RegisterDoctor()
         {
-
             return View();
         }
 

@@ -53,7 +53,7 @@ namespace CW21.Controllers
             var result = _patientRepository.LoginPatient(model);
             if (result)
             {
-                return RedirectToAction("Index");
+                return Redirect("/Dashbored/Index");
             }
             else
             {

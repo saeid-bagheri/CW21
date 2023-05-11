@@ -2,6 +2,7 @@
 
 namespace CW21.Areas.DoctorArea.Controllers
 {
+    [Area("DoctorArea")]
     public class DashboredController : Controller
     {
         public IActionResult Index()
